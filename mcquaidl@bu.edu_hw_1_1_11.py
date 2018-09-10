@@ -1,0 +1,49 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Sep  8 15:24:04 2018
+
+Problem 1.11
+
+For the program below, please see the following abbreviations I have used for 
+ease of use:
+    
+p = population
+y = days in the year
+b = births
+d = deaths
+i = immigrants
+"""
+
+#Inputs
+p = 312032486
+y = 365
+b = 7
+d = 13
+i = 45
+
+#Births in a day
+bd = (86400 // b)
+#Deaths in a day
+dd = (86400 // d)
+#Immigrants in a day
+id = (86400 // i)
+
+#Calculation for Population in 1 year
+year1 = p + ((bd*y) - (dd*y) + (id*y))
+#Calculation for Population in 2 years
+year2 = year1 + ((bd*y) - (dd*y) + (id*y))
+#Calculation for Population in 3 years
+year3 = year2 + ((bd*y) - (dd*y) + (id*y))
+#Calculation for Population in 4 years
+year4 = year3 + ((bd*y) - (dd*y) + (id*y))
+#Calculation for Population in 5 years
+year5 = year4 + ((bd*y) - (dd*y) + (id*y))
+
+
+
+print('The population numbers for the next 5 years based on the inputs used will be the following:')
+print('End of year 1: ', year1)
+print('End of year 2: ', year2)
+print('End of year 3: ', year3)
+print('End of year 4: ', year4)
+print('End of year 5: ', year5)

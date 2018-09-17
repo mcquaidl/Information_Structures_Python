@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+"""
+Larry McQuaid
+MET CS 521
+9/15/18
+Homework 2, Question 2.5
+Financial application: calculate tips
+"""
+
+try:
+    user_input = input('Enter the subtotal and a gratuity rate\
+ (i.e. \"100, 20\"): ')
+
+    user_input_valid= user_input.split(',')
+    subtotal = float(user_input_valid[0])
+    gratuity_rate = float(user_input_valid[1])
+    
+    gratuity = (subtotal
+        * (gratuity_rate/100))
+    
+    total = (gratuity
+             + subtotal)
+    
+    print('The gratuity is {} and the total is {}' .format(round(gratuity,2),\
+          round(total, 2)))
+
+except:
+    print('Please enter a valid number combination in the format (xx, xx)')

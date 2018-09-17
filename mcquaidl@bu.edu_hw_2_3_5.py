@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+"""
+Larry McQuaid
+MET CS 521
+9/15/18
+Homework 2, Question 3.5
+Geometry: area of a regular polygon
+"""
+
+import math
+
+try:
+    side_number = float(input('Enter the number of sides: '))
+    side_length = float(input('Enter the side length: ' ))
+    
+    polygon_area = ((side_number * math.pow(side_length, 2))
+                     / (4 * (math.tan(math.pi / side_number))))
+    
+    print('The area of the polygon is {}' .format(polygon_area))
+
+except: 
+    print('Please enter a valid number')

@@ -12,12 +12,10 @@ height = 7.9
 
 area = width * height
 
-print('The area of a rectangle with a width of ', width, ' and a height of ', 
-      height, ' is equal to ', area)
+print('The area of a rectangle with a width of  {}  and a height of {} is equal to {} ' .format(width, height, area))
 
 #Calulation for perimeter
 
 perimeter = 2*(width + height)
 
-print('The perimeter of a rectangle with a width of ', width, 
-      ' and a height of ', height, ' is equal to ', perimeter)
+print('The perimeter of a rectangle with a width of {}  and a height of {} is equal to {} ' .format(width, height, perimeter))

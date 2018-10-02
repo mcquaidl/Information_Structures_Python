@@ -1,0 +1,60 @@
+# -*- coding: utf-8 -*-
+"""
+Larry McQuaid
+MET CS 521
+9/22/18
+Homework 3, Question 5.1
+Count positive and negative numbers and compute the average of numbers
+"""
+
+positive_value = 0
+negative_value = 0
+total = 0
+average = 0
+count = 0
+
+try:
+    user_input = float(input('Enter an integer, the input ends if it is 0: '))
+    
+    if user_input == 0:
+        print('You didn\'t enter any number')
+    
+    else:        
+        if user_input > 0:
+            positive_value += 1
+        
+        if user_input < 0:
+            negative_value += 1
+        
+        total += user_input
+        
+        count += 1
+        
+        average = total/count
+        
+        while user_input != 0:
+            user_input = float(input('Enter an integer, the input ends if it \
+is 0: '))
+            
+            if user_input == 0:
+                    print('''
+The number of positives is {}
+The number of negatives is {}
+The total is {}
+The average is {:.2f}'''
+.format(positive_value, negative_value, total, average))
+        
+            if user_input > 0:
+                positive_value += 1
+            
+            if user_input < 0:
+                negative_value += 1
+            
+            total += user_input
+            
+            count += 1
+            
+            average = total/(count)
+        
+except:
+    print('Please enter a valid number.')

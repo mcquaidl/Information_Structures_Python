@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+"""
+Larry McQuaid
+MET CS 521
+9/22/18
+Homework 3, Question 5.3
+Conversion from kilograms to pounds
+"""
+
+kilograms = 1
+
+pounds = kilograms * 2.2
+
+print('''
+Kilograms        Pounds
+{}                    {:.1f}'''
+.format(kilograms, pounds))
+
+while kilograms < 199:
+    kilograms += 2
+    
+    pounds = kilograms * 2.2
+    
+    print('''
+{}                    {:.1f}'''
+.format(kilograms, pounds))

@@ -1,0 +1,46 @@
+# -*- coding: utf-8 -*-
+"""
+Larry McQuaid
+MET CS 521
+9/22/18
+Homework 3, Question 4.3
+Algebra: solve 2 x 2 linear equations
+"""
+
+try:
+    user_input = input('Enter a, b, c, d, e, f: ')
+
+    user_input_valid= user_input.split(',')
+    a = float(user_input_valid[0])
+    b = float(user_input_valid[1])
+    c = float(user_input_valid[2])
+    d = float(user_input_valid[3])
+    e = float(user_input_valid[4])
+    f = float(user_input_valid[5])
+    
+    denominator = ((a
+                   *d)
+                   - (b
+                      *c))
+    
+    if denominator == 0:
+        print('The equation has no solution')
+        
+    else: 
+        x = (((e
+             *d)
+             - (b
+                *f))
+             / (denominator))
+
+        y = (((a
+             *f)
+             - (e
+                *c))
+             / (denominator))
+    
+    
+        print('x is {:.2f} and y is {:.2f}' .format(x, y))
+
+except:
+    print('Please enter valid numbers for a, b, c, d, e, and f')

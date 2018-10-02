@@ -1,0 +1,35 @@
+# -*- coding: utf-8 -*-
+"""
+Larry McQuaid
+MET CS 521
+9/29/18
+Homework 4, Question 10.1
+Assign grades
+"""
+
+try:
+    user_input = input('Enter scores: ')
+
+    grades = user_input.split(' ') #Separating numbers by spaces
+    grade_list = [int(x) for x in grades] #Converting entries to integers
+    
+    highest_grade = max(grade_list) #Finding max score to establish grading curve
+    
+    #Establishing scores for each grade entered
+    for student in range(len(grade_list)):
+        if grade_list[student] >= highest_grade - 10:
+            grade = 'A'
+        elif grade_list[student] >= highest_grade - 20:
+            grade = 'B'
+        elif grade_list[student] >= highest_grade - 30:
+            grade = 'C'
+        elif grade_list[student] >= highest_grade - 40:
+            grade = 'D'
+        else:
+            grade = 'F'
+            
+        print('Student {} score is {} and grade is {}' \
+              .format(student, grade_list[student], grade))
+    
+except:
+    print('Please enter valid grades.')

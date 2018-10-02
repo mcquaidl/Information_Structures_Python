@@ -1,0 +1,59 @@
+# -*- coding: utf-8 -*-
+"""
+Larry McQuaid
+MET CS 521
+9/29/18
+Homework 4, Question 14.1
+Display keywords
+"""
+
+import os.path
+import sys
+
+
+def countKeywords():
+    keyWords = {"and", "as", "assert", "break", "class", 
+                "continue", "def", "del", "elif", "else",
+                "except", "False", "finally", "for", "from",
+                "global", "if", "import", "in", "is", "lambda",
+                "None", "nonlocal", "not", "or", "pass", "raise",
+                "return", "True", "try", "while", "with", "yield"}
+
+
+    filename= input('Enter a Python source code filename: ').strip()
+    
+    if not os.path.isfile(filename): #Check if file exists
+        print('File {} does not exist' .format(filename))
+        sys.exit()
+    
+    infile = open(filename, 'r') #Open files for input
+    
+    text = infile.read().split() #Read and split words from the file
+    
+    infile.close #Close the file after it has been read
+    
+    #Initialize number and word count
+    number_count = 0
+    word_count = {}
+    
+    #Store and count the keywords present in the file from the list above
+    for word in text:
+        if word in keyWords:
+            number_count +=1
+            if word in word_count.keys():
+                word_count[word] +=1
+            else:
+                word_count[word] = 1
+    
+    #Print out filename and the number of times a keyword appears
+    print('\nThe unique number of keywords in {} is {}' .format(filename,\
+          number_count))
+    
+    #Print out the keywords and respective number of times it appears
+    print('\nThe keywords and the number of times each keyword appears \
+in this file are as follows: \n')
+    for key in word_count.keys():
+        print('{}: ({})' .format(key, word_count[key]))
+        
+if __name__ == "__main__":
+    countKeywords() #Calls main function

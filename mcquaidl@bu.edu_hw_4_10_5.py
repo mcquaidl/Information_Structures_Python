@@ -1,0 +1,29 @@
+# -*- coding: utf-8 -*-
+"""
+Larry McQuaid
+MET CS 521
+9/29/18
+Homework 4, Question 10.5
+Print distinct numbers
+"""
+
+try:
+    user_input = input('Enter ten numbers: ')
+    
+    numbers = user_input.split(' ') #Separating numbers by spaces
+    list1 = [int(x) for x in numbers] #Converting entries to integers
+    list2 = [] #Establishing list 2
+    
+    
+    #Adding unique numbers from list 1 to list 2 if they are not already present
+    for user_num in list1:
+        if user_num not in list2:
+            list2.append(user_num)
+    
+    #Create string to remove the [] brackets that are present in outputs for lists
+    list_string = ' ' .join(str(unique_list) for unique_list in list2)
+    
+    print('The distinct numbers are: {}' .format(list_string))
+        
+except:
+    print('Please enter a valid number')

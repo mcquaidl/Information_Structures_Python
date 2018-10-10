@@ -1,0 +1,42 @@
+# -*- coding: utf-8 -*-
+"""
+Larry McQuaid
+MET CS 521
+10/2/18
+Homework 5, Question 6.3
+Palindrome integer
+"""
+
+# Return the reversal of an integer, e.g. reverse(456) returns  # 654
+def reverse(number):
+    """
+    Ask the user to input a number, and reverse that number
+    
+    Param 1: user input
+    """ 
+    reversed_number = str(number[::-1]) #Reversing the number as a string
+    
+    return reversed_number #Return new reversed number
+    
+def isPalindrome():
+    """
+    Return true if the number is a palindrome
+    
+    Param 1: user input from the reverse function
+    """
+    user_input = input('Please enter a number: ')
+    if not user_input.isdigit():
+        print('User input is not an integer, please enter an integer.')#Check
+        #to see if the usser input is an integer
+    else:
+        number = str(user_input)  #Converting entry to a string
+        new_number = reverse(number) #Call reverse function
+        
+        #Determining if the number is a palindrome
+        if user_input == new_number:
+            print('The number {}, is a palindrome' .format(number))
+        else:
+            print('The number {}, is not a palindrome' .format(number))
+
+if __name__ == "__main__": 
+   isPalindrome() #Call the isPalindrome function

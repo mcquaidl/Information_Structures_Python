@@ -4,7 +4,7 @@ Larry McQuaid
 MET CS 521
 9/29/18
 Homework 4, Question 11.1
-Print distinct numbers
+Matrix Calculation
 """
 
 def sumColumn(m, columnIndex):

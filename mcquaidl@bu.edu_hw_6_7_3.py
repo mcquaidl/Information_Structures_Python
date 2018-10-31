@@ -1,0 +1,60 @@
+# -*- coding: utf-8 -*-
+"""
+Larry McQuaid
+MET CS 521
+10/11/18
+Homework 6, Question 7.3
+The Account Class
+"""
+
+class Account:
+    #Store the id, balance, and annual interest rate %
+    def __init__(self, identity=0, balance =100.00, interest_rate=0.0):
+        self.id = identity
+        self.balance = balance
+        self.annualInterestRate = interest_rate
+    
+    #Mutator method for id, balance, & interest rate (redundant??
+    def setid(self, identity):
+        self.id = identity
+    
+    def setBalance(self, balance):
+        self.balance = balance
+        
+    def setInterestRate(self, interest_rate):
+        self.annualInterestRate = interest_rate    
+    
+    #Accessor for id, balance, annual & monthly interest rate
+    def getid(self):
+        return self.id
+    
+    def getbalance(self):
+        return self.balance
+
+    def getMonthlyInterestRate(self):
+        return self.annualInterestRate/ 12
+    
+    #Accessor for monthly interest accrued
+    def getMonthlyInterest(self):
+        return self.balance * self.getMonthlyInterestRate()
+    
+    #Function for withdrawing funds if sufficient
+    def withdraw(self, withdraw):
+            self.balance -= withdraw
+    
+    #Function for depositing funds
+    def deposit(self, deposit):
+        self.balance += deposit
+
+#Initialize and call the mutator methods with the given inputs
+Account_1 = Account(1122, 20000, 0.045)
+Account_1.withdraw(2500)
+Account_1.deposit(3000)
+
+#Print out the variables for Account 1 given the inputs
+print('The account balance, monthly interest rate, and monthly interest for\
+ Account ID {} is as follows:\
+\nBalance: ${:.2f}\
+\nMonthly Interest Rate: {:.4f}%\
+\nMonthly Interest Accrued: ${:.2f}' .format(Account_1.id, Account_1.balance,\
+ Account_1.getMonthlyInterestRate(), Account_1.getMonthlyInterest()))

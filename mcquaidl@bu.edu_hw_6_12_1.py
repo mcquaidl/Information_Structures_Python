@@ -1,0 +1,92 @@
+# -*- coding: utf-8 -*-
+"""
+Larry McQuaid
+MET CS 521
+10/11/18
+Homework 6, Question 12.1
+The Triangle class
+"""
+import math
+
+class GeometricObject:
+    #Initializing the Geometric Object Class
+    def __init__(self, color= 'Black', isFilled=0):
+        self.color = color
+        self.isFilled = isFilled
+
+    
+    #Accessor methods for the Geometric Object variables
+    def getColor(self):
+        return self.color
+    
+    #function to determine if the triangle is filled
+    def getIsFilled(self):
+        if (self.isFilled != 0):
+            return ('Yes')
+        else:
+            return ('No')
+    
+class Triangle(GeometricObject):
+    #Initializing the triangle values
+    def __init__(self, side1=1.0, side2=1.0, side3=1.0):
+        super().__init__()
+        self.side1 = side1
+        self.side2 = side2
+        self.side3 = side3
+    
+    #Accessor methods for the side variables
+    def getSide1(self):
+        return self.side1
+    
+    def getSide2(self):
+        return self.side2
+    
+    def getSide3(self):
+        return self.side3
+    
+    
+    #Method that returns the area of the triangle
+    def getArea(self):
+        sides = (self.side1 + self.side2 + self.side3) / 2
+        area = math.sqrt(sides*(sides-self.side1) * (sides - self.side2)\
+                         *(sides - self.side3))
+        return area
+    
+    #Method that returns the perimeter of the triangle
+    def getPerimeter(self):
+        return (self.side1 + self.side2 + self.side3)
+    
+    def __str__(self):
+        outcome = ('\nSide 1 = {}\nSide 2 = {}\nSide 3 = {}' \
+  .format(str(self.side1), str(self.side2), str(self.side3)))
+        
+        return outcome
+
+try:
+    #Call the triangle class
+    Triangle_1 = Triangle()
+    GeometricObject_1 = GeometricObject()
+    print('The information associated to Triangle 1 is as follows: {}\
+    \nArea = {:.2f}\nPerimeter = {:.2f}\nShape Filled: {}\nColor = {}' \
+    .format(Triangle_1, Triangle_1.getArea(), Triangle_1.getPerimeter(),\
+    GeometricObject_1.getIsFilled(), GeometricObject_1.getColor()))
+    
+    #Ask the user for inputs for Triangle 2
+    side_1 = float(input('Please enter int lengths for Triangle 2, Side 1: '))
+    side_2 = float(input('Please enter int lengths for Triangle 2, Side 2: '))
+    side_3 = float(input('Please enter int lengths for Triangle 2, Side 3: '))
+    color_2 = str(input('Please enter the color you would like Triangle 2 to\
+ be: '))
+    isFilled_2 = int(input('Please indicate whether you would like Triangle 2\
+ to be filled using 1 or 0 (1 is filled, 0 is not filled): '))
+    
+    #Initialize the classes with the new values and print
+    GeometricObject_2 = GeometricObject(color_2, isFilled_2)
+    Triangle_2 =Triangle(side_1, side_2, side_3)
+    print('The information associated to Triangle 1 is as follows: {}\
+    \nArea = {:.2f}\nPerimeter = {:.2f}\nShape Filled: {}\nColor = {}' \
+    .format(Triangle_1, Triangle_1.getArea(), Triangle_1.getPerimeter(),\
+    GeometricObject_2.getIsFilled(), GeometricObject_2.getColor()))
+
+except: #Displays if an incompatible value is entered
+    print('Something went wrong, please try again')

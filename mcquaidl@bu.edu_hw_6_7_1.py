@@ -1,0 +1,56 @@
+# -*- coding: utf-8 -*-
+"""
+Larry McQuaid
+MET CS 521
+10/11/18
+Homework 6, Question 7.1
+The Rectangle Class
+"""
+
+
+class Rectangle:
+    #Construct a Rectangle Object
+    def __init__(self, width=1, height=2):
+        self.width = width
+        self.height = height
+        
+    #Get Perimeter method
+    def getArea(self):
+        return (self.width 
+                * self.height)
+    
+    #Get Perimeter method
+    def getPerimeter(self):
+        return 2 * (self.width + self.height)
+
+#Initialize width and height  
+width = 4
+height = 40
+
+#Print width & height of the first rectangle
+print('The width of the first rectangle is {}\
+\nThe height of the first rectangle is {}' .format(width, height, ))
+
+#Call the Rectangle class with the width and height
+rectangle_1 = Rectangle(width, height)
+
+#call and print area, & perimeter of first rectangle
+print('The area of the first rectangle is {}\
+\nThe perimeter of the first rectangle is {} '\
+.format(rectangle_1.getArea(), rectangle_1.getPerimeter()))
+
+#Re-initialize width and height
+width = 3.5
+height = 35.7
+
+#Print width & height of the second rectangle
+print('The width of the second rectangle is {}\
+\nThe height of the second rectangle is {}' .format(width, height, ))
+
+#Call the Rectangle class with the width and height
+rectangle_2 = Rectangle(width, height)
+
+#Call and print area, & perimeter of second rectangle
+print('The area of the second rectangle is {:.2f}\
+\nThe perimeter of the second rectangle is {} '\
+.format(rectangle_2.getArea(), rectangle_2.getPerimeter()))

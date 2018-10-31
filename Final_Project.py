@@ -1,0 +1,275 @@
+# -*- coding: utf-8 -*-
+"""
+Larry McQuaid
+MET CS 521
+10/21/18
+Final Project
+College Majors & Median Salary Progression
+"""
+
+import pandas as pd
+import sys
+
+class ImportingExcelFile:
+    #This class imports the excel file that will be utlized throughout
+    #the program
+    file = pd.ExcelFile('degrees_salaries.xlsx')
+    
+    #Import the one sheet in the file
+    file.sheet_names
+    df = pd.read_excel('degrees_salaries.xlsx', sheet_name = 0)
+    
+    #Import each column to a list
+    undergrad_major = df['Undergraduate Major'].tolist()
+    start_med_salary = df['Starting Median Salary'].tolist()
+    mid_med_salary = df['Mid-Career Median Salary'].tolist()
+    percent_change = df['Percent change from Starting to Mid-Career Salary']\
+    .tolist()
+    mid_10th_percentile = df['Mid-Career 10th Percentile Salary'].tolist()
+    mid_25th_percentile = df['Mid-Career 25th Percentile Salary'].tolist()
+    mid_75th_percentile = df['Mid-Career 75th Percentile Salary'].tolist()
+    mid_90th_percentile = df['Mid-Career 90th Percentile Salary'].tolist()
+
+class InputValidation:
+    #Assertions for the input value on the main menu screen
+    def checkInput(user_selection):
+        #Ensuring the user is entering a number above or equal to zero
+        assert (user_selection >= 1), "Please reopen the application &\
+ enter a number between 1 & 6"
+        #Ensuring the user is entering a number below or equal to six
+        assert (user_selection <= 6), "Please reopen the application &\
+ enter a number between 1 & 6"
+
+class MajorsByStartingSalary(ImportingExcelFile):
+    #Joins the starting salary and the undergraduate majors to display the
+    #undergraduate degrees with the top starting salaries, and the 
+    #lowest starting salaries
+    def __init__(self, undergrad_major = '', start_med_salary = 0):
+        super().__init__()
+        self.undergrad_major = undergrad_major
+        self.start_med_salary = start_med_salary
+    
+    #Take the undergrad degree column and the starting median salary columns
+    #join and then sort on the salary, ascending
+    def getLowestPayingStartingMajors(self):
+        self.start_med_salary, self.undergrad_major =  zip(*sorted(zip\
+        (ImportingExcelFile.start_med_salary,\
+         ImportingExcelFile.undergrad_major)))
+        print('The undergraduate degrees with the lowest median starting \
+salaries are as follows: \n' )
+        #show the lowest 10 paying majors
+        for top_undergrad in range(10):
+            print('{}:\t${}' .format(self.undergrad_major[top_undergrad], \
+                  self.start_med_salary[top_undergrad]))
+            top_undergrad += 1
+    
+    #Take the undergrad degree column and the starting median salary columns
+    #join and then sort on salary, descending
+    def getHighestPayingStartingMajors(self):
+        self.start_med_salary, self.undergrad_major =  \
+        zip(*sorted(zip(ImportingExcelFile.start_med_salary\
+                , ImportingExcelFile.undergrad_major), reverse=True))
+        print('The undergraduate degrees with the top median starting \
+salaries are as follows: \n' )
+        for top_undergrad in range(10):
+            print('{}:\t${}' .format(self.undergrad_major[top_undergrad], \
+                  self.start_med_salary[top_undergrad]))
+            top_undergrad += 1    
+
+class MajorsByMidCareerSalary(ImportingExcelFile):
+    #Joins the starting salary and the undergraduate majors to display the
+    #undergraduate degrees with the top mid-career salaries, and the 
+    #lowest mid-career salaries
+    def __init__(self, undergrad_major = '', mid_med_salary = 0):
+        super().__init__()
+        self.undergrad_major = undergrad_major
+        self.mid_med_salary = mid_med_salary
+        
+    #Take the undergrad degree column and the mid-career median salary columns
+    #join and then sort on the salary
+    def getLowestPayingMidCareerMajors(self):
+        self.mid_med_salary, self.undergrad_major =  zip(*sorted(zip\
+            (ImportingExcelFile.mid_med_salary\
+                , ImportingExcelFile.undergrad_major)))
+        print('The undergraduate degrees with the lowest median mid-career \
+salaries are as follows: \n' )
+        for top_undergrad in range(10):
+            print('{}:\t${}' .format(self.undergrad_major[top_undergrad], \
+                  self.mid_med_salary[top_undergrad]))
+            top_undergrad += 1
+
+    #Take the undergrad degree column and the mid-career median salary columns
+    #join and then sort on the highest paying mid-career salaries
+    def getHighestPayingMidCareerMajors(self):
+        self.mid_med_salary, self.undergrad_major =  zip(*sorted(zip\
+                (ImportingExcelFile.mid_med_salary, \
+                ImportingExcelFile.undergrad_major), reverse=True))
+        print('The undergraduate degrees with the top median mid-career \
+salaries are as follows: \n' )
+        for top_undergrad in range(10):
+            print('{}:\t${}' .format(self.undergrad_major[top_undergrad], \
+                  self.mid_med_salary[top_undergrad]))
+            top_undergrad += 1   
+        
+class ListOutCareerStatistics(ImportingExcelFile):
+    #create a class that allows the user to choose from a list of majors 
+    #and displays all of the associated data metrics
+    def __init__(self, undergrad_major = '', mid_med_salary = 0, \
+                 start_med_salary = 0, mid_10th_percentile = 0, \
+                 mid_25th_percentile = 0, mid_75th_percentile = 0, \
+                 mid_90th_percentile = 0):
+        super().__init__()
+        self.undergrad_major = undergrad_major
+        self.mid_med_salary = mid_med_salary
+        self.start_med_salary = start_med_salary
+        self.mid_10th_percentile = mid_10th_percentile
+        self.mid_25th_percentile = mid_25th_percentile
+        self.mid_75th_percentile = mid_75th_percentile
+        self.mid_90th_percentile = mid_90th_percentile
+    
+    #Assigns the major to a number and allows the user to select a number 
+    #until they choose to exit
+    def getUndergradMajors(self):
+        self.undergrad_major = ImportingExcelFile.undergrad_major
+        #Initialize the list
+        major_list = []
+        #Initialize the count
+        count = 0
+        
+        #seperating by commas, and adding to the major list
+        for major in self.undergrad_major:
+            major = major.split(',')
+            major_list.extend(major)
+            print('{}. {}' .format(count, str(major).strip('[, ], \'')))
+            count +=1
+        print('50. Exit') #Add the exit clause
+        
+        #Tie together the columns so that when selected the appropriate 
+        #information displays for everyone
+        self.undergrad_major, self.mid_med_salary, self.start_med_salary, \
+        self.mid_10th_percentile, self.mid_25th_percentile, \
+        self.mid_75th_percentile, self.mid_90th_percentile = \
+        zip(*zip(ImportingExcelFile.undergrad_major, \
+                 ImportingExcelFile.mid_med_salary,\
+                 ImportingExcelFile.start_med_salary,\
+                 ImportingExcelFile.mid_10th_percentile, \
+                 ImportingExcelFile.mid_25th_percentile, \
+                 ImportingExcelFile.mid_75th_percentile, \
+                 ImportingExcelFile.mid_90th_percentile))
+        
+        #While loop that keeps the user in the program until they ask to exit
+        while True:
+            #Try block to safeguard against any incorrect entries
+            try:
+                major_selection = int(input('Please enter the number \
+corresponding to the major that you would like to see statistics on\
+(enter \'50\' to exit): '))
+                
+                #Safeguards for entering numbers too high
+                if major_selection > 50:
+                    print('Invalid selection, please enter a number 0 - 49')
+                #Safegurads for entering negative numbers
+                elif major_selection < 0:
+                    print('Invalid selection, please enter a number 0 - 49')
+                #Exit clause
+                elif major_selection == 50:
+                    break
+                #Print the salaries and the salary percentiles in 
+                #mid-career
+                else:
+                    print('\nMajor: {}\nStarting Median Salary: ${}\n\
+Mid-Career Median Salary: ${}\n\t10th Percentile: ${}\n\t25th Percentile: \
+${}\n\t75th Percentile: ${}\n\t90th Percentile: ${}' \
+.format(self.undergrad_major[major_selection],\
+        self.start_med_salary[major_selection], \
+        self.mid_med_salary[major_selection], \
+            self.mid_10th_percentile[major_selection], \
+            self.mid_25th_percentile[major_selection], \
+            self.mid_75th_percentile[major_selection], \
+            self.mid_90th_percentile[major_selection]))       
+            
+            #Safeguard against any incorrect entries
+            except:
+                print('Please enter a valid integer, 0 - 50')
+#Main menu function that displays when you open the application
+def MainMenu(): 
+    #ImportingExcelFile_1 = ImportingExcelFile()
+    MajorsByStartingSalary_1 = MajorsByStartingSalary() 
+    MajorsByMidCareerSalary_1 = MajorsByMidCareerSalary()
+    ListOutCareerStatistics_1 = ListOutCareerStatistics()
+    
+    #Creating a while loop so the user has to choose to exit the
+    #application or it will continue going
+    while True:
+        #Informing the user of the application and asking what they would
+        #like to do
+        print('The Wall Street Journal has recently released the\
+ statistics regarding popular undergraduate majors and their respective salar\
+ies throughout that individuals career progression. Please select one of the \
+following options to continue:\n1: Review data\n2: Get source link\n3: Exit')
+        
+        start = int(input('Please enter a choice: '))
+    
+        if start == 1:
+            while True:
+                print('\nMain Menu\n1: Top 10 undergraduate degrees that \
+have the lowest median starting salaries.\n2: Top 10 undergraduate degrees \
+that have the highest median starting salaries.\n3: Top 10 undergraduate \
+degrees that have the lowest median mid-career salaries.\n4: Top 10 \
+undergraduate degrees that have the highest median mid-career salaries.\n5: \
+Detailed statistics broken down by major.\n6. Return to original menu')
+                
+                #Ask the user which option they would like to select
+                user_selection = int(input('\nPlease enter a choice: '))
+                    
+                #Displays the top ten lowest paying starting majors
+                if user_selection == 1:
+                    MajorsByStartingSalary_1.\
+                    getLowestPayingStartingMajors()
+                
+                #Displays the top ten highest paying starting majors
+                elif user_selection == 2:                   
+                    MajorsByStartingSalary_1.\
+                          getHighestPayingStartingMajors()
+            
+                #Displays the top ten lowest paying mid-career majors
+                elif user_selection == 3:
+                    MajorsByMidCareerSalary_1.\
+                          getLowestPayingMidCareerMajors()
+            
+                #Displays the top ten highest paying mid career majors
+                elif user_selection == 4:
+                    MajorsByMidCareerSalary_1.\
+                          getHighestPayingMidCareerMajors()
+                    
+                #List out undergraduate majors for the purpose of 
+                #selecting a major and viewing it's salary progression
+                elif user_selection == 5:
+                    ListOutCareerStatistics_1.\
+                          getUndergradMajors()
+                
+                #Quit the application
+                elif user_selection == 6:
+                    break
+                
+                #Call assertion statements for the user input to make sure
+                #it is within the specified parameters
+                else:
+                    print (InputValidation.checkInput(user_selection))
+                
+        #Displays the URL for the source
+        elif start == 2:
+            print('https://www.kaggle.com/wsj/college-salaries/vers\
+ion/1\n')
+        #Safeguard for user entering number higher than 3
+        elif start > 3:
+            print('Please enter a valid number 1 - 3\n')
+        #Safeguard for user entering number lower than 0
+        elif start < 0:
+            print('Please enter a valid number 1 - 3\n')
+        #System exit
+        else:
+           sys.exit()
+#Ask the user to restart the program
+if __name__ == "__main__": 
+   MainMenu() #Call the main menu function

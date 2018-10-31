@@ -4,7 +4,8 @@ Larry McQuaid
 MET CS 521
 10/21/18
 Final Project
-College Majors & Median Salary Progression
+College Majors & Median Salary Progression:
+Please see the accompanying document "Final Project Overview" before running this code.
 """
 
 import pandas as pd
